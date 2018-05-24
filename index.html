@@ -1,1 +1,129 @@
 
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dataviz Practica 1</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">		
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.5/nv.d3.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+		
+			<div class="col-md-8 col-md-offset-3">
+			<h1 id="title">Gráfica 1</h1>
+			</div>
+			
+			<div class="col-md-8 col-md-offset-2">
+     <div id= "chart2">
+       <svg width="960px" height="500px"></svg>
+			</div>
+      
+		</div>
+	</div>
+	
+	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
+   <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.1.1/d3.min.js"></script>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.5/nv.d3.min.js"></script>
+    
+    
+	<script>
+    /* Here you can put here some magic on Javascript */
+    
+    //Regular pie chart example
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true);
+
+    d3.select("#chart svg")
+        .datum(exampleData())
+        .transition().duration(350)
+        .call(chart);
+
+  return chart;
+});
+
+//Donut chart example
+nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)     //Display pie labels
+      .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+      .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+      .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+      .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+      ;
+
+    d3.select("#chart2 svg")
+        .datum(exampleData())
+        .transition().duration(350)
+        .call(chart);
+
+  return chart;
+});
+
+//Pie chart example data. Note how there is only a single array of key-value pairs.
+function exampleData() {
+  return  [
+      { 
+        "label": "One",
+        "value" : 29.765957771107
+      } , 
+      { 
+        "label": "Two",
+        "value" : 0
+      } , 
+      { 
+        "label": "Three",
+        "value" : 32.807804682612
+      } , 
+      { 
+        "label": "Four",
+        "value" : 196.45946739256
+      } , 
+      { 
+        "label": "Five",
+        "value" : 0.19434030906893
+      } , 
+      { 
+        "label": "Six",
+        "value" : 98.079782601442
+      } , 
+      { 
+        "label": "Seven",
+        "value" : 13.925743130903
+      } , 
+      { 
+        "label": "Eight",
+        "value" : 5.1387322875705
+      }
+    ];
+}
+
+	</script>
+  </body>
+</html>
